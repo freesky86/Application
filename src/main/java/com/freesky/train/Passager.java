@@ -45,8 +45,12 @@ public class Passager {
 		for (Ticket ticket : tickets) {
 			StationNum start = ticket.getStarting();
 			StationNum end = ticket.getTerminal();
-			
+			// starting [ )
 			if (starting.getIndex() >= start.getIndex() && starting.getIndex() < end.getIndex()) {
+				return false;
+			}
+			// terminal ( ]
+			if (terminal.getIndex() > start.getIndex() && terminal.getIndex() <= end.getIndex()) {
 				return false;
 			}
 		}

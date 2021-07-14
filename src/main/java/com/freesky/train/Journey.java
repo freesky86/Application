@@ -30,12 +30,14 @@ public class Journey {
 		
 		journey.initialize();
 		
-		journey.buyTicket(StationNum.Shanghai, StationNum.Nanjing);
-		journey.buyTicket(StationNum.Suzhou, StationNum.Nanjing);
-		journey.buyTicket(StationNum.Nanjing, StationNum.Jinan);
-		journey.buyTicket(StationNum.Shijiazhuang, StationNum.Beijing);
-		journey.buyTicket(StationNum.Jinan, StationNum.Shijiazhuang);
+//		journey.buyTicket(StationNum.Shanghai, StationNum.Nanjing);
+//		journey.buyTicket(StationNum.Suzhou, StationNum.Nanjing);
+//		journey.buyTicket(StationNum.Nanjing, StationNum.Jinan);
+//		journey.buyTicket(StationNum.Shijiazhuang, StationNum.Beijing);
+//		journey.buyTicket(StationNum.Jinan, StationNum.Shijiazhuang);
 		
+		journey.buyTicket(StationNum.Suzhou, StationNum.Nanjing);
+		journey.buyTicket(StationNum.Shanghai, StationNum.Suzhou);
 	}
 	
 	public void buyTicket(StationNum starting, StationNum terminal) {
