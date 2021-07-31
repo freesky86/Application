@@ -14,6 +14,8 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
 /**
+ * Channel & Buffer
+ * 
  * @author freesky
  */
 public class ReaderAndWriter {
