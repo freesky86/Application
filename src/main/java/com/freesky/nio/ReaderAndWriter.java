@@ -17,6 +17,7 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -27,19 +28,44 @@ import java.util.Set;
  */
 public class ReaderAndWriter {
 
+    public static void handleAccept(SelectionKey key) throws IOException {
+        ServerSocketChannel ssChannel = (ServerSocketChannel) key.channel();
+        SocketChannel sc = ssChannel.accept();
+        sc.configureBlocking(false);
+        sc.register(key.selector(), SelectionKey.OP_READ, ByteBuffer.allocateDirect(1024));
+    }
+
+    public static void handleRead(SelectionKey key) throws IOException {
+        SocketChannel sc = (SocketChannel) key.channel();
+        ByteBuffer buf = (ByteBuffer) key.attachment();
+        long bytesRead = sc.read(buf);
+        while (bytesRead > 0) {
+            buf.flip();
+            while (buf.hasRemaining()) {
+                System.out.print((char) buf.get());
+            }
+            System.out.println();
+            buf.clear();
+            bytesRead = sc.read(buf);
+        }
+        if (bytesRead == -1) {
+            sc.close();
+        }
+    }
+
     /**
      * @param args
      */
     public static void main(String[] args) {
         // channel & buffer
-        operateByChannelAndBuffer();
+        // operateByChannelAndBuffer();
 
         // selector
-        // try {
-        // operateBySelector();
-        // } catch (IOException e) {
-        // e.printStackTrace();
-        // }
+        try {
+            operateBySelector();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // File file = new File(".");
         // System.out.println(file.getAbsolutePath());
@@ -105,7 +131,7 @@ public class ReaderAndWriter {
 
         // b. 绑定通道到指定端口
         ServerSocket socket = server.socket();
-        InetSocketAddress address = new InetSocketAddress(9090);
+        InetSocketAddress address = new InetSocketAddress(8080);
         socket.bind(address);
 
         // c. 向Selector中注册感兴趣的事件
@@ -113,6 +139,7 @@ public class ReaderAndWriter {
 
         // 3. 处理事件
         try {
+            System.out.println("--Listening...");
             while (true) {
                 // 该调用会阻塞，直到至少有一个事件就绪、准备发生
                 selector.select();
@@ -122,11 +149,21 @@ public class ReaderAndWriter {
                 while (iter.hasNext()) {
                     SelectionKey key = iter.next();
                     iter.remove();
-                    System.out.println("--Key is " + key);
+                    // System.out.println("--Key is " + key);
+                    processKey(key);
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void processKey(SelectionKey key) throws IOException {
+        if (key.isAcceptable()) {
+            handleAccept(key);
+        }
+        if (key.isReadable()) {
+            handleRead(key);
         }
     }
 }
