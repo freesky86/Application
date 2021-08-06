@@ -5,13 +5,14 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * https://www.scalyr.com/blog/maven-log4j2-project/
+ * https://blog.csdn.net/u011389474/article/details/70054256
  * 
  * @author maxzhang
  *
  */
-public class LoggerTest {
+public class Log4j2Test {
 	
-	private static Logger logger = LogManager.getLogger(LoggerTest.class);
+	private static Logger logger = LogManager.getLogger(Log4j2Test.class);
 
 	public static void main(String[] args) {
 		logger.trace("We've just greeted the user!");
