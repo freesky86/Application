@@ -1,9 +1,13 @@
 package com.freesky.train;
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Journey {
+	
+	private static Logger logger = Logger.getLogger(Journey.class);
 	
 	private Passager passager;
 	private Train train;
@@ -26,6 +30,8 @@ public class Journey {
 	}
 
 	public static void main(String[] args) {
+		logger.info("--begin to initialize Journey class.");
+		
 		Journey journey = new Journey();
 		
 		journey.initialize();
