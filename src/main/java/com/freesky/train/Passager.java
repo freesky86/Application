@@ -41,6 +41,19 @@ public class Passager {
 		return ticket;
 	}
 	
+	/**
+	 * 火车有多节车厢构成，每节车厢有若干座位，每个座位可以卖出多张车票。
+	 * 如何判断乘客购买车票时，某个座位是否可以购买?
+	 * 我们需要检查该座位已购的所有车票和乘客打算购买的车票的起始站和终点站。
+	 * 如果乘客准备购买的车票的[起始站]落在该座位上任一车票起始站和终点站之间(前闭后开)
+	 * 或者乘客准备购买的车票的[终点站]落在该座位上任一车票起始站和终点站之间(前开后闭)
+	 * 那么就返回false，告知乘客不能购买该座位。否则，就可以购买。
+	 * 
+	 * @param tickets   某座位上的所有已购车票
+	 * @param starting  准备购买车票的起始站
+	 * @param terminal  准备购买车票的终点站
+	 * @return   false--不能购买   true--可以购买
+	 */
 	protected boolean checkTicket(List<Ticket> tickets, StationNum starting, StationNum terminal) {
 		for (Ticket ticket : tickets) {
 			StationNum start = ticket.getStarting();
