@@ -43,6 +43,16 @@ public class SHAUtil {
     public String SHA256(final String strText) {
         return SHA(strText, "SHA-256");
     }
+	
+    /**
+     * 传入文本内容，返回 SHA-384 串
+     * 
+     * @param strText
+     * @return
+     */
+    public String SHA384(final String strText) {
+        return SHA(strText, "SHA-384");
+    }
 
     /**
      * 传入文本内容，返回 SHA-512 串
@@ -53,7 +63,7 @@ public class SHAUtil {
     public String SHA512(final String strText) {
         return SHA(strText, "SHA-512");
     }
-    
+
     /**
      * md5加密
      * @param strText
@@ -109,6 +119,7 @@ public class SHAUtil {
         System.out.println("SHA-1加密== " + sha.SHA1("admin"));
         System.out.println("SHA224加密== " + sha.SHA224("admin"));
         System.out.println("SHA256加密== " + sha.SHA256("admin"));
+        System.out.println("SHA384加密== " + sha.SHA384("admin"));
         System.out.println("SHA512加密== " + sha.SHA512("admin"));
         System.out.println("SHAMD5加密== " + sha.SHAMD5("admin"));
     }
