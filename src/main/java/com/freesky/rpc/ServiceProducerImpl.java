@@ -1,0 +1,8 @@
+package com.freesky.rpc;
+
+public class ServiceProducerImpl implements ServiceProducer {
+    @Override
+    public String sendData(String data) {
+        return "I am service producer!!!, the data is " + data;
+    }
+}
