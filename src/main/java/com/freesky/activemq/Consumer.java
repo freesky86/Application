@@ -1,5 +1,6 @@
 /**
  * https://www.cnblogs.com/loong-hon/p/9661946.html
+ * https://blog.csdn.net/liuyuanq123/article/details/79109218
  * 
  * Æô¶¯activeMQ
  * D:\Software\Apache\apache-activemq-5.16.3\bin 
